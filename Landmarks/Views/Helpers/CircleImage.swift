@@ -11,12 +11,18 @@ struct CircleImage: View {
     var image: Image
     
     var body: some View {
-        image
-            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-            .overlay {
-                Circle().stroke(.white, lineWidth: 4)
-            }
-            .shadow(radius: 7)
+        if #available(macOS 12.0, *) {
+            image
+                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                .overlay(alignment: .top) {
+                    Circle().stroke(.white, lineWidth: 4)
+                }
+                .shadow(radius: 7)
+        } else {
+            image
+                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                .shadow(radius: 7)
+        }
     }
 }
 
